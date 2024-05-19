@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
 import Profile from "./pages/Profile"
 import Dashboard from "./pages/Dashboard"
+import AddBlog from "./pages/AddBlog"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/add-blog" element={<AddBlog />} />
                </Routes>
             </div>
          </main>
