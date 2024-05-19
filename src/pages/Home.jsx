@@ -1,9 +1,16 @@
 import React from 'react'
+import BlogCard from '../components/BlogCard'
 
 const Home = () => {
     return (
-        <div className=''>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia autem sunt ex cumque totam, modi error eum expedita vitae quod?
+        <div className='flex flex-col gap-8 items-start'>
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
         </div>
     )
 }
