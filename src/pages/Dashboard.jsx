@@ -24,7 +24,7 @@ const tabs = [
 
 const Dashboard = () => {
 
-    const [activeTab, setActiveTab] = React.useState('Authors')
+    const [activeTab, setActiveTab] = React.useState('Blogs')
 
 
     return (

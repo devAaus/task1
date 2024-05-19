@@ -1,23 +1,34 @@
 import React from 'react'
-import BlogForm from './BlogForm'
 import BlogsTable from './BlogsTable'
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 const BlogsTab = () => {
 
-    const handlSubmitBlog = (e) => {
-        e.preventDefault()
+    const {
+        isLoading,
+        error,
+        data: blog,
+    } = useQuery({
+        queryKey: ['blog'],
+        queryFn: () =>
+            axios
+                .get(`${import.meta.env.VITE_SERVER_URL}/blog`)
+                .then((res) => res.data),
+    });
+
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
     }
 
     return (
         <div className='flex flex-col gap-4'>
-            <button
-                className='w-fit ml-auto btn btn-xs btn-primary text-base'
-                onClick={() => document.getElementById('modal_1').showModal()}
-            >
-                Add Blog
-            </button>
-            <BlogForm handleSubmitBlog={handlSubmitBlog} />
-            <BlogsTable />
+            <BlogsTable blog={blog} />
         </div>
     )
 }

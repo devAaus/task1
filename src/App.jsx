@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar"
 import Profile from "./pages/Profile"
 import Dashboard from "./pages/Dashboard"
 import AddBlog from "./pages/AddBlog"
+import BlogDetail from "./pages/BlogDetail"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             <div className="py-6 px-8">
                <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/add-blog" element={<AddBlog />} />

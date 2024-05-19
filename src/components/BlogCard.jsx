@@ -1,28 +1,41 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { Link } from 'react-router-dom';
 
-const BlogCard = () => {
+const BlogCard = ({ blog }) => {
+
+    const formattedDate = useMemo(() => {
+        const date = new Date(blog.createdAt);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }, [blog.createdAt]);
+
     return (
         <div className='py-4 hover:scale-[1.005] transition-all duration-300 ease-in-out flex flex-col items-start justify-center cursor-pointer'>
-            <article>
-                <h2 className='text-3xl text-title font-bold'>
-                    The Two Reacts
-                </h2>
+            <Link to={`/blog/${blog._id}`}>
+                <article>
+                    <h2 className='text-3xl text-title font-bold'>
+                        {blog.title}
+                    </h2>
 
-                <div className='flex gap-2 font-medium'>
-                    <p className='text-xs text-gray-300 ml-1'>
-                        by Fransisco
+                    <div className='flex gap-2 font-medium'>
+                        <p className='text-xs text-gray-300 ml-1'>
+                            {blog.author}
+                        </p>
+
+                        <p className='text-xs text-gray-300 ml-1'>
+                            {formattedDate}
+                        </p>
+                    </div>
+
+                    <p className='text-base mt-1 ml-1 font-medium'>
+                        {blog.content.substring(0, 30)}....
                     </p>
 
-                    <p className='text-xs text-gray-300 ml-1'>
-                        December 21, 2022
-                    </p>
-                </div>
-
-                <p className='text-base mt-1 ml-1 font-medium'>
-                    The Limits of React....
-                </p>
-
-            </article>
+                </article>
+            </Link>
         </div>
     )
 }
