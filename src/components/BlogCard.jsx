@@ -2,7 +2,7 @@ import React from 'react'
 
 const BlogCard = () => {
     return (
-        <div className='py-4 hover:scale-[1.005] transition-all duration-300 ease-in-out flex flex-col items-start justify-center'>
+        <div className='py-4 hover:scale-[1.005] transition-all duration-300 ease-in-out flex flex-col items-start justify-center cursor-pointer'>
             <article>
                 <h2 className='text-3xl text-title font-bold'>
                     The Two Reacts

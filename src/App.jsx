@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
 import AddBlog from "./pages/AddBlog"
+import Profile from "./pages/Profile"
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
             <div className="py-6 px-8">
                <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="/add-blog" element={<AddBlog />} />
                </Routes>
             </div>
