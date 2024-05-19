@@ -1,21 +1,21 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
-import AddBlog from "./pages/AddBlog"
 import Profile from "./pages/Profile"
+import Dashboard from "./pages/Dashboard"
 
 function App() {
 
    return (
       <div className="bg-bg">
-         <main className="min-h-screen max-w-screen-sm mx-auto text-text">
+         <main className="min-h-screen max-w-screen-md mx-auto text-text">
             <Navbar />
 
             <div className="py-6 px-8">
                <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/add-blog" element={<AddBlog />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                </Routes>
             </div>
          </main>
