@@ -7,6 +7,7 @@ import AddBlog from "./pages/AddBlog"
 import BlogDetail from "./pages/BlogDetail"
 import Authors from "./pages/admin/Authors"
 import Comments from "./pages/admin/Comments"
+import Author from "./pages/Author"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                   <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/add-blog" element={<AddBlog />} />
+                  <Route path="/author/:id" element={<Author />} />
 
 
 

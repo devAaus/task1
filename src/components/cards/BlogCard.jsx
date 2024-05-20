@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom';
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, isHome }) => {
 
     const authorId = blog?.author;
     const {
@@ -44,10 +44,10 @@ const BlogCard = ({ blog }) => {
                     </h2>
 
                     <div className='flex items-center gap-2 font-medium'>
-                        <p className='text-sm text-gray-300 ml-1'>
+                        {isHome && <p className='text-sm text-gray-300 ml-1'>
                             by
                             <span className='ml-2 text-base text-gray-200'>{author.fullName}</span>
-                        </p>
+                        </p>}
 
                         <p className='text-xs text-gray-300 ml-1'>
                             {formattedDate}
