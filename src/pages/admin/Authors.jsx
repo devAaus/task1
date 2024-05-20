@@ -1,32 +1,73 @@
 import React, { useState } from 'react'
-import Tab from '../../components/Tab'
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import AuthorForm from '../../components/forms/AuthorForm'
 import AuthorTable from '../../components/tables/AuthorTable'
 import AdminLayout from './AdminLayout';
+import toast from 'react-hot-toast';
 
 const Authors = () => {
 
-    const {
-        isLoading,
-        error,
-        data: author,
-    } = useQuery({
-        queryKey: ['author'],
+    const queryClient = useQueryClient();
+
+    const { isLoading, error, data: authors, } = useQuery({
+        queryKey: ['authors'],
         queryFn: () =>
             axios
                 .get(`${import.meta.env.VITE_SERVER_URL}/author`)
                 .then((res) => res.data),
     });
 
-    console.log(author);
+
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
 
-    const handleSubmitAuthor = (e) => {
+    const addAuthormutation = useMutation({
+        mutationFn: (newAuthor) => axios.post(`${import.meta.env.VITE_SERVER_URL}/author`, newAuthor),
+
+        onSuccess: () => {
+            queryClient.invalidateQueries(['author']);
+            setFullName('');
+            setEmail('');
+            document.getElementById('modal_2').close();
+        },
+    });
+
+    const deleteAuthormutation = useMutation({
+        mutationFn: (id) =>
+            axios.delete(`${import.meta.env.VITE_SERVER_URL}/author/${id}`),
+        onSuccess: () => {
+            queryClient.invalidateQueries('authors');
+        },
+        onError: (error) => {
+            console.error(error);
+        }
+    });
+
+    const handleSubmit = (e) => {
         e.preventDefault();
+        const newAuthor = { fullName, email };
+        toast.promise(
+            addAuthormutation.mutateAsync(newAuthor),
+            {
+                loading: 'Adding Author...',
+                success: 'Author Added!',
+                error: 'Error While Adding.',
+            }
+        );
     };
+
+    const handleDeleteAuthor = (id) => {
+        toast.promise(
+            deleteAuthormutation.mutateAsync(id),
+            {
+                loading: 'Deleting Blog...',
+                success: 'Blog Deleted!',
+                error: 'Error While Deleting.',
+            }
+        );
+    };
+
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -47,14 +88,17 @@ const Authors = () => {
             </button>
 
             <AuthorForm
-                handleSubmitAuthor={handleSubmitAuthor}
+                handleSubmit={handleSubmit}
                 fullName={fullName}
                 setFullName={setFullName}
                 email={email}
                 setEmail={setEmail}
             />
 
-            <AuthorTable author={author} />
+            <AuthorTable
+                authors={authors}
+                handleDeleteAuthor={handleDeleteAuthor}
+            />
         </AdminLayout>
 
     )

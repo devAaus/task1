@@ -34,6 +34,7 @@ const Dashboard = () => {
         }
     });
 
+
     const deleteBlog = (id) => {
         toast.promise(
             mutation.mutateAsync(id),

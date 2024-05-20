@@ -1,9 +1,11 @@
-import React from 'react'
+
 import { FaRegEdit } from 'react-icons/fa'
 import { MdDeleteOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
-const AuthorTable = ({ author }) => {
+const AuthorTable = ({ authors, handleDeleteAuthor }) => {
+
+
     return (
         <div className="overflow-x-auto">
             <table className="table w-full">
@@ -18,7 +20,7 @@ const AuthorTable = ({ author }) => {
 
                 <tbody>
                     {/* row 1 */}
-                    {author.map((a, index) => (
+                    {authors.map((a, index) => (
                         <tr className='hover' key={a._id}>
                             <td>{index + 1}</td>
 
@@ -29,9 +31,9 @@ const AuthorTable = ({ author }) => {
                                     <FaRegEdit size={17} />
                                 </Link>
 
-                                <Link to={'/delete-blog'}>
+                                <button onClick={() => handleDeleteAuthor(a._id)}>
                                     <MdDeleteOutline size={20} color='red' />
-                                </Link>
+                                </button>
                             </td>
                         </tr>
                     ))}

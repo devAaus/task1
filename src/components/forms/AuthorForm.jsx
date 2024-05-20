@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const AuthorForm = ({ handlSubmitAuthor, fullName, email, setEmail, setFullName }) => {
+const AuthorForm = ({ handleSubmit, fullName, email, setEmail, setFullName }) => {
     return (
         <dialog id="modal_2" className="modal">
             <div className="modal-box">
@@ -15,11 +15,12 @@ const AuthorForm = ({ handlSubmitAuthor, fullName, email, setEmail, setFullName 
                     ✕
                 </button>
 
-                <form className='flex flex-col gap-4' onSubmit={handlSubmitAuthor}>
+                <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
 
                     <input
                         type="text"
-                        placeholder="FullName"
+                        placeholder="Full Name"
+                        name='fullName'
                         className="input input-bordered w-full max-w-xs"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
@@ -29,18 +30,23 @@ const AuthorForm = ({ handlSubmitAuthor, fullName, email, setEmail, setFullName 
                     <input
                         type="email"
                         placeholder="Email"
+                        name='email'
                         className="input input-bordered w-full max-w-xs"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button
+                        type="submit"
+                        className="btn btn-primary">
+                        Submit
+                    </button>
 
                 </form>
             </div>
         </dialog>
-    )
+    );
 }
 
-export default AuthorForm
+export default AuthorForm;
