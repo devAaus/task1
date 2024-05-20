@@ -77,7 +77,7 @@ const BlogDetail = () => {
             </div>
 
             <p className='text-base leading-7 mt-6 ml-1 font-medium'>
-                {blog.content}
+                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
             </p>
         </div>
     )

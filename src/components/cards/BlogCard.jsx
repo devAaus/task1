@@ -55,7 +55,7 @@ const BlogCard = ({ blog, isHome }) => {
                     </div>
 
                     <p className='text-base mt-1 ml-1 font-medium'>
-                        {blog.content.substring(0, 30)}....
+                        <div dangerouslySetInnerHTML={{ __html: blog.content.substring(0, 40) + '....' }} />
                     </p>
 
                 </article>

@@ -45,7 +45,15 @@ const AddBlog = () => {
             <h2 className='text-4xl text-title font-bold mb-6'>
                 Add Blog
             </h2>
-            <BlogForm handleSubmit={handleSubmit} title={title} setTitle={setTitle} content={content} setContent={setContent} authorId={authorId} setAuthorId={setAuthorId} />
+            <BlogForm
+                handleSubmit={handleSubmit}
+                title={title}
+                setTitle={setTitle}
+                content={content}
+                setContent={setContent}
+                authorId={authorId}
+                setAuthorId={setAuthorId}
+            />
         </div>
     )
 }

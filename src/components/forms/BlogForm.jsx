@@ -1,6 +1,16 @@
 import React from 'react'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css'
 
-const BlogForm = ({ handleSubmit, title, setTitle, content, setContent, authorId, setAuthorId }) => {
+const BlogForm = ({
+    handleSubmit,
+    title,
+    setTitle,
+    content,
+    setContent,
+    authorId,
+    setAuthorId
+}) => {
 
     return (
 
@@ -35,13 +45,23 @@ const BlogForm = ({ handleSubmit, title, setTitle, content, setContent, authorId
                 className='input input-bordered w-full max-w-xs'
             />
 
-            <textarea
+            {/* <textarea
                 className="textarea textarea-bordered"
                 placeholder="Description"
                 name="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-            ></textarea>
+            ></textarea> */}
+
+
+            <ReactQuill
+                theme="bubble"
+                value={content}
+                onChange={setContent}
+                placeholder='Description'
+                className='textarea textarea-bordered p-0 h-60'
+            />
+
 
             <button
                 type="submit"
