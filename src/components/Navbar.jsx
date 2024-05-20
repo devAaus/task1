@@ -27,13 +27,15 @@ const Navbar = () => {
 
 
                             <div className="dropdown dropdown-hover dropdown-end">
+
                                 <div tabIndex={0}>
-                                    <div className="avatar">
-                                        <div className="w-8 rounded-full">
-                                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    <div className="avatar placeholder">
+                                        <div className="bg-primary text-white rounded-full w-8 shadow-xl">
+                                            <span className="text-base font-bold">U</span>
                                         </div>
                                     </div>
                                 </div>
+
                                 <ul tabIndex={0} className="dropdown-content z-[1] menu shadow bg-base-100 rounded-box w-32">
                                     <li>
                                         <Link to={'/profile'}>
