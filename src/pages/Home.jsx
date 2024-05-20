@@ -28,14 +28,14 @@ const Home = () => {
     }
 
     return (
-        <div className='grid grid-cols-3'>
-            <div className='col-span-2 flex flex-col gap-8 items-start'>
+        <div className='grid grid-cols-7 gap-2'>
+            <div className='col-span-5 flex flex-col gap-8 items-start'>
                 {blog.map((blog) => (
                     <BlogCard key={blog._id} blog={blog} />
                 ))}
             </div>
 
-            <div className='col-span-1'>
+            <div className='col-span-2'>
                 <AuthorSection />
             </div>
         </div>
