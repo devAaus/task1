@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogForm from '../components/BlogForm'
+import BlogForm from '../components/forms/BlogForm'
 
 const AddBlog = () => {
 

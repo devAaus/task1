@@ -2,9 +2,11 @@ import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
 import Profile from "./pages/Profile"
-import Dashboard from "./pages/Dashboard"
+import Dashboard from "./pages/admin/Dashboard"
 import AddBlog from "./pages/AddBlog"
 import BlogDetail from "./pages/BlogDetail"
+import Authors from "./pages/admin/Authors"
+import Comments from "./pages/admin/Comments"
 
 function App() {
 
@@ -18,8 +20,14 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/add-blog" element={<AddBlog />} />
+
+
+
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/dashboard/authors" element={<Authors />} />
+                  <Route path="/dashboard/comments" element={<Comments />} />
+
                </Routes>
             </div>
          </main>

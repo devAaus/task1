@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogsTable from './BlogsTable'
+import BlogsTable from './tables/BlogsTable'
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 

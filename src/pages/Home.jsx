@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogCard from '../components/BlogCard'
+import BlogCard from '../components/cards/BlogCard'
 import AuthorSection from '../components/AuthorSection'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';

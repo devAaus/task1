@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import AuthorTable from './AuthorTable'
-import AuthorForm from './AuthorForm'
+import AuthorTable from './tables/AuthorTable'
+import AuthorForm from './forms/AuthorForm'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
