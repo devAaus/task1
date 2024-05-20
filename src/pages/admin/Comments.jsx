@@ -1,19 +1,36 @@
 import React from 'react'
 import Tab from '../../components/Tab'
 import CommentsTable from '../../components/tables/CommentsTable'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import AdminLayout from './AdminLayout';
 
 const Comments = () => {
+
+    const {
+        isLoading,
+        error,
+        data: comments,
+    } = useQuery({
+        queryKey: ['comments'],
+        queryFn: () =>
+            axios
+                .get(`${import.meta.env.VITE_SERVER_URL}/comment`)
+                .then((res) => res.data),
+    });
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
     return (
-        <div className='flex flex-col justify-center gap-4'>
-            <h2 className='text-4xl text-title font-bold mb-6 text-center'>
-                Admin Dashboard
-            </h2>
-
-            <Tab />
-
-            <CommentsTable />
-
-        </div>
+        <AdminLayout>
+            <CommentsTable comments={comments} />
+        </AdminLayout>
     )
 }
 

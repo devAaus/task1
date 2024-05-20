@@ -1,19 +1,62 @@
-import React from 'react'
-import AuthorsTab from '../../components/AuthorsTab'
+import React, { useState } from 'react'
 import Tab from '../../components/Tab'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import AuthorForm from '../../components/forms/AuthorForm'
+import AuthorTable from '../../components/tables/AuthorTable'
+import AdminLayout from './AdminLayout';
 
 const Authors = () => {
+
+    const {
+        isLoading,
+        error,
+        data: author,
+    } = useQuery({
+        queryKey: ['author'],
+        queryFn: () =>
+            axios
+                .get(`${import.meta.env.VITE_SERVER_URL}/author`)
+                .then((res) => res.data),
+    });
+
+    console.log(author);
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const handleSubmitAuthor = (e) => {
+        e.preventDefault();
+    };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
     return (
-        <div className='flex flex-col justify-center gap-4'>
-            <h2 className='text-4xl text-title font-bold mb-6 text-center'>
-                Admin Dashboard
-            </h2>
 
-            <Tab />
+        <AdminLayout>
+            <button
+                className='w-fit ml-auto btn btn-xs btn-primary text-base'
+                onClick={() => document.getElementById('modal_2').showModal()}
+            >
+                Add Author
+            </button>
 
-            <AuthorsTab />
+            <AuthorForm
+                handleSubmitAuthor={handleSubmitAuthor}
+                fullName={fullName}
+                setFullName={setFullName}
+                email={email}
+                setEmail={setEmail}
+            />
 
-        </div>
+            <AuthorTable author={author} />
+        </AdminLayout>
+
     )
 }
 
