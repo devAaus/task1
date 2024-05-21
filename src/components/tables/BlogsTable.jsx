@@ -13,7 +13,7 @@ const BlogsTable = ({ blogs, deleteBlog }) => {
                         <th>S.N.</th>
                         <th>Title</th>
                         <th>Author</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
