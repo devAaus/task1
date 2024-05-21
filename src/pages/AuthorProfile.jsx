@@ -34,15 +34,26 @@ const Author = () => {
     }
 
     return (
-        <div className='flex flex-col'>
-            <h2 className='text-3xl text-title font-bold'>
-                {author.fullName}
-            </h2>
+        <div className='flex flex-col gap-2'>
 
-            <h2 className='text-2xl text-title font-semibold'>
-                Email:
-                <span className='text-xl ml-2 font-normal text-gray-200'>{author.email}</span>
-            </h2>
+            <div className='flex items-center gap-4'>
+                <div className="avatar placeholder">
+                    <div className="bg-neutral text-white rounded-full w-20">
+                        <span className="text-3xl">
+                            {author.fullName[0]}
+                        </span>
+                    </div>
+                </div>
+
+                <h2 className='text-3xl text-title font-bold'>
+                    {author.fullName}
+                </h2>
+            </div>
+
+            <span className='text-xl ml-2 font-normal text-gray-200'>
+                {author.email}
+            </span>
+
 
             <div role="tablist" className="tabs tabs-lifted mt-12">
                 <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Blogs" checked readOnly />
