@@ -73,7 +73,7 @@ const CommentSection = ({ blogId }) => {
                 setName={setName}
             />
 
-            <div className='flex flex-col gap-4 w-full'>
+            <div className='flex flex-col gap-4 w-full mt-8'>
                 {comments.map((comment) => (
                     <CommentCard comment={comment} key={comment._id} />
                 ))}
