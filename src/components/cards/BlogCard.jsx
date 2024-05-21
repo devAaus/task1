@@ -45,14 +45,14 @@ const BlogCard = ({ blog, isHome }) => {
                             <span className='ml-2 text-base text-gray-200'>{author.fullName}</span>
                         </p>}
 
-                        <p className='text-xs text-gray-300 ml-1'>
+                        {/* <p className='text-xs text-gray-300 ml-1'>
                             {formattedDate}
-                        </p>
+                        </p> */}
                     </div>
 
-                    <p className='text-base mt-1 ml-1 font-medium'>
+                    {/* <p className='text-base mt-1 ml-1 font-medium'>
                         <div dangerouslySetInnerHTML={{ __html: blog.content.substring(0, 40) + '....' }} />
-                    </p>
+                    </p> */}
 
                 </article>
             </Link>
