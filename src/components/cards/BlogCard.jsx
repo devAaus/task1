@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useMemo } from 'react'
+import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 const BlogCard = ({ blog, isHome }) => {
@@ -18,14 +18,10 @@ const BlogCard = ({ blog, isHome }) => {
                 .then((res) => res.data),
     });
 
-    const formattedDate = useMemo(() => {
-        const date = new Date(blog.createdAt);
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    }, [blog.createdAt]);
+    const formattedDate = blog && blog.createdAt
+        ? format(new Date(blog.createdAt), 'MMMM d, yyyy')
+        : '';
+
 
     if (isLoadingAuthor) {
         return <div>Loading...</div>;

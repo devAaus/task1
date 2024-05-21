@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+import CommentSection from '../components/CommentSection';
+import { format } from 'date-fns';
 
 const BlogDetail = () => {
     const { id } = useParams()
 
+
+    //fetching blog data
     const {
         isLoading,
         error,
@@ -19,6 +22,7 @@ const BlogDetail = () => {
     });
 
 
+    //fetching author data
     const authorId = blog?.author;
     const {
         isLoading: isLoadingAuthor,
@@ -32,15 +36,13 @@ const BlogDetail = () => {
                 .then((res) => res.data),
     });
 
-    const formattedDate = useMemo(() => {
-        if (!blog) return '';
-        const date = new Date(blog.createdAt);
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-    }, [blog]);
+
+
+
+    //formatting date
+    const formattedDate = blog && blog.createdAt
+        ? format(new Date(blog.createdAt), 'MMMM d, yyyy')
+        : '';
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -60,7 +62,7 @@ const BlogDetail = () => {
 
 
     return (
-        <div>
+        <div className='flex flex-col'>
             <h2 className='text-5xl text-title font-bold'>
                 {blog.title}
             </h2>
@@ -79,6 +81,9 @@ const BlogDetail = () => {
             <p className='text-base leading-7 mt-6 ml-1 font-medium'>
                 <div dangerouslySetInnerHTML={{ __html: blog.content }} />
             </p>
+
+            <CommentSection blogId={blog._id} />
+
         </div>
     )
 }

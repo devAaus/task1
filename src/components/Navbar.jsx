@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Logo from '../assets/images/logo.png'
 import { Link } from 'react-router-dom'
 
 
@@ -10,17 +9,19 @@ const Navbar = () => {
     return (
         <nav className='py-8 px-4'>
 
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between '>
 
                 <Link to="/">
-                    <img src={Logo} alt='logo' className='h-7 w-30' />
+                    <h2 className='text-2xl bg-gradient-to-br from-pink-300 to-purple-400 bg-clip-text text-transparent  font-bold'>
+                        metaBlog
+                    </h2>
                 </Link>
 
                 {isLoggedIn
                     ? (
                         <div className='flex items-center justify-center gap-6 '>
                             <Link to={'/add-blog'}>
-                                <span className='btn btn-xs btn-primary text-base'>
+                                <span className='btn btn-sm btn-primary text-base px-1'>
                                     Add Blog
                                 </span>
                             </Link>
@@ -49,9 +50,15 @@ const Navbar = () => {
                                         </Link>
                                     </li>
 
-                                    <button className=' text-left ml-4 mt-2'>
-                                        <Link to={'/'}>
-                                            <span className='btn btn-sm btn-error'>Logout</span>
+                                    <button
+                                        className=' text-left ml-4 mt-2'
+                                        onClick={() => setIsLoggedIn(false)}
+                                    >
+                                        <Link
+                                            to={'/'}
+                                            className='btn btn-sm btn-error'
+                                        >
+                                            Logout
                                         </Link>
                                     </button>
                                 </ul>
@@ -59,7 +66,7 @@ const Navbar = () => {
                         </div>
 
                     ) : (
-                        <Link to={'/login'}>
+                        <Link to={'/'} onClick={() => setIsLoggedIn(true)}>
                             <span className='btn btn-sm btn-primary text-lg'>
                                 Login
                             </span>

@@ -14,6 +14,7 @@ const AuthorTable = ({ authors, handleDeleteAuthor }) => {
                     <tr >
                         <th>S.N.</th>
                         <th>Author</th>
+                        <th>Email</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -25,6 +26,8 @@ const AuthorTable = ({ authors, handleDeleteAuthor }) => {
                             <td>{index + 1}</td>
 
                             <td>{a.fullName} </td>
+
+                            <td>{a.email} </td>
 
                             <td className='flex gap-2 items-center'>
                                 <Link to={'/edit-blog'} className='text-blue-400'>

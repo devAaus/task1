@@ -23,7 +23,8 @@ const Authors = () => {
     const [email, setEmail] = useState('');
 
     const addAuthormutation = useMutation({
-        mutationFn: (newAuthor) => axios.post(`${import.meta.env.VITE_SERVER_URL}/author`, newAuthor),
+        mutationFn: (newAuthor) =>
+            axios.post(`${import.meta.env.VITE_SERVER_URL}/author`, newAuthor),
 
         onSuccess: () => {
             queryClient.invalidateQueries(['author']);

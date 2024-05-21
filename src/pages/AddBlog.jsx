@@ -13,7 +13,9 @@ const AddBlog = () => {
     const [authorId, setAuthorId] = useState('');
 
     const addBlogmutation = useMutation({
-        mutationFn: (newAuthor) => axios.post(`${import.meta.env.VITE_SERVER_URL}/blog`, newAuthor),
+        mutationFn: (newBlog) =>
+            axios
+                .post(`${import.meta.env.VITE_SERVER_URL}/blog`, newBlog),
 
         onSuccess: () => {
             queryClient.invalidateQueries(['blogs']);
