@@ -20,6 +20,16 @@ export const deleteBlog = async (id) => {
     return response.data;
 };
 
+export const increaseLikesCount = async (id) => {
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/blog/likes/${id}`);
+    return response.data;
+};
+
+
+export const decreaseLikesCount = async (id) => {
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/blog/dislikes/${id}`);
+    return response.data;
+};
 
 
 
