@@ -57,10 +57,10 @@ const Author = () => {
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="blogs">
+                <TabsContent value="blogs" className=" py-6 px-2 flex flex-col gap-4">
                     {blog.length > 0 ? (
                         blog.map((b) => (
-                            <BlogCard blog={b} key={b._id} isHome={false} />
+                            <BlogCard blog={b} key={b._id} isProfile={true} />
                         ))
                     ) : (
                         <div>No blogs found.</div>

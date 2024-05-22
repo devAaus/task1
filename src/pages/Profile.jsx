@@ -48,7 +48,7 @@ const Profile = () => {
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="blogs" className="border-x-4 border-y-2  rounded-md  -mt-1 py-6 px-2 flex flex-col gap-4">
+                <TabsContent value="blogs" className=" py-6 px-2 flex flex-col gap-4">
                     {blogs?.map((blog) => (
                         <BlogCard key={blog._id} blog={blog} isProfile={true} />
                     ))}
