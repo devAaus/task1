@@ -15,6 +15,12 @@ export const addBlog = async (newBlog) => {
     return response.data;
 };
 
+export const updateBlog = async (updatedBlog) => {
+    const { id } = updatedBlog;
+    const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/blog/${id}`, updatedBlog);
+    return response.data;
+};
+
 export const deleteBlog = async (id) => {
     const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/blog/${id}`);
     return response.data;
@@ -30,6 +36,7 @@ export const decreaseLikesCount = async (id) => {
     const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/blog/dislikes/${id}`);
     return response.data;
 };
+
 
 
 

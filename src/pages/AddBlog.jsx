@@ -25,7 +25,6 @@ const AddBlog = () => {
         },
         onError: (error) => {
             console.error(error);
-            toast.error('Error while adding the blog');
         },
     });
 

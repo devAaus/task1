@@ -54,7 +54,7 @@ const TableDetail = ({ blog, index, handledeleteBlog }) => {
             <TableCell>{author.fullName}</TableCell>
 
             <TableCell className='flex gap-2 items-center'>
-                <Link to={'/edit-blog'} className='text-blue-400'>
+                <Link to={`/update-blog/${blog._id}`} className='text-blue-400'>
                     <FaRegEdit size={17} />
                 </Link>
 

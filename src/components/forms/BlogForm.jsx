@@ -3,15 +3,6 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
 
 const BlogForm = ({
     handleSubmit,
@@ -20,7 +11,7 @@ const BlogForm = ({
     content,
     setContent,
     setAuthorId,
-    authors
+    authorId
 }) => {
 
     return (
@@ -39,20 +30,13 @@ const BlogForm = ({
                 onChange={(e) => setTitle(e.target.value)}
             />
 
-            <Select onValueChange={(value) => setAuthorId(value)}>
-                <SelectTrigger className="max-w-xs">
-                    <SelectValue placeholder="Select Author" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectGroup>
-                        {authors.map((author) => (
-                            <SelectItem key={author._id} value={author._id}>
-                                {author.fullName}
-                            </SelectItem>
-                        ))}
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
+            <Input
+                type="text"
+                placeholder="AuthorId"
+                name="author"
+                value={authorId}
+                onChange={(e) => setAuthorId(e.target.value)}
+            />
 
 
             <ReactQuill

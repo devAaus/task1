@@ -6,6 +6,7 @@ import Dashboard from "./pages/admin/Dashboard"
 import AddBlog from "./pages/AddBlog"
 import BlogDetail from "./pages/BlogDetail"
 import AuthorProfile from "./pages/AuthorProfile"
+import UpdateBlog from "./pages/admin/UpdateBlog"
 
 function App() {
 
@@ -20,8 +21,8 @@ function App() {
                   <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/add-blog" element={<AddBlog />} />
+                  <Route path="/update-blog/:id" element={<UpdateBlog />} />
                   <Route path="/author/:id" element={<AuthorProfile />} />
-
 
 
                   <Route path="/dashboard" element={<Dashboard />} />
