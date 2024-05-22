@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button } from './ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 
 
 const Navbar = () => {
@@ -7,7 +16,7 @@ const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true)
 
     return (
-        <nav className='py-8 px-4'>
+        <nav className='py-8'>
 
             <div className='flex items-center justify-between '>
 
@@ -21,55 +30,52 @@ const Navbar = () => {
                     ? (
                         <div className='flex items-center justify-center gap-6 '>
                             <Link to={'/add-blog'}>
-                                <span className='btn btn-sm btn-primary text-base px-1'>
+                                <Button variant="default" size="sm" className="self-end">
                                     Add Blog
-                                </span>
+                                </Button>
                             </Link>
 
 
-                            <div className="dropdown dropdown-hover dropdown-end">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Avatar>
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
 
-                                <div tabIndex={0}>
-                                    <div className="avatar placeholder">
-                                        <div className="bg-primary text-white rounded-full w-8 shadow-xl">
-                                            <span className="text-base font-bold">U</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                </DropdownMenuTrigger>
 
-                                <ul tabIndex={0} className="dropdown-content z-[1] menu shadow bg-base-100 rounded-box w-32">
-                                    <li>
+                                <DropdownMenuContent size="sm">
+                                    <DropdownMenuItem>
                                         <Link to={'/profile'}>
                                             Profile
                                         </Link>
-                                    </li>
+                                    </DropdownMenuItem>
 
-                                    <li>
+                                    <DropdownMenuItem>
                                         <Link to={'/dashboard'}>
                                             Dashboard
                                         </Link>
-                                    </li>
+                                    </DropdownMenuItem>
 
-                                    <button
-                                        className=' text-left ml-4 mt-2'
+                                    <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        className="ml-1 mt-1"
                                         onClick={() => setIsLoggedIn(false)}
                                     >
-                                        <Link
-                                            to={'/'}
-                                            className='btn btn-sm btn-error'
-                                        >
-                                            Logout
-                                        </Link>
-                                    </button>
-                                </ul>
-                            </div>
+                                        Logout
+                                    </Button>
+
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+
                         </div>
 
                     ) : (
-                        <Link to={'/'} onClick={() => setIsLoggedIn(true)}>
-                            <span className='btn btn-sm btn-primary text-lg'>
+                        <Link to={'/login'}>
+                            <Button className='btn btn-sm btn-primary text-lg'>
                                 Login
-                            </span>
+                            </Button>
                         </Link>
                     )
                 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { formatDistanceToNow } from 'date-fns'
+import { Avatar, AvatarFallback } from '../ui/avatar'
 
 const CommentCard = ({ comment }) => {
     const createdAt = new Date(comment.createdAt)
@@ -8,13 +9,11 @@ const CommentCard = ({ comment }) => {
         <div className='p-2 '>
 
             <div className='flex gap-2 items-center'>
-                <div className="avatar placeholder">
-                    <div className="bg-primary text-white rounded-full w-8 shadow-xl">
-                        <span className="text-base font-bold capitalize">
-                            {comment.name[0]}
-                        </span>
-                    </div>
-                </div>
+                <Avatar>
+                    <AvatarFallback className=" bg-primary text-neutral font-medium">
+                        {comment.name[0]}
+                    </AvatarFallback>
+                </Avatar>
 
                 <div className='flex flex-col justify-center'>
 

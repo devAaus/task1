@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import CommentForm from './forms/CommentForm'
-import axios from 'axios'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import CommentCard from './cards/CommentCard'
+import { addComment, getComments } from '@/services/axios.service'
 
 const CommentSection = ({ blogId }) => {
 
@@ -10,10 +10,7 @@ const CommentSection = ({ blogId }) => {
 
     const { isLoading, error, data } = useQuery({
         queryKey: ['comments'],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/comment`)
-                .then((res) => res.data),
+        queryFn: getComments
     })
 
     const comments = data?.filter((c) => c.blogId === blogId)
@@ -23,8 +20,7 @@ const CommentSection = ({ blogId }) => {
     const [name, setName] = useState('')
 
     const mutation = useMutation({
-        mutationFn: (newComment) =>
-            axios.post(`${import.meta.env.VITE_SERVER_URL}/comment`, newComment),
+        mutationFn: addComment,
 
         onSuccess: () => {
             queryClient.invalidateQueries(['comments'])

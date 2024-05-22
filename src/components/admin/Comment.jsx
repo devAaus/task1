@@ -1,12 +1,11 @@
 import React from 'react'
-import Tab from '../../components/Tab'
 import CommentsTable from '../../components/tables/CommentsTable'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import AdminLayout from './AdminLayout';
 import toast from 'react-hot-toast';
+import { deleteComment, getComments } from '@/services/axios.service';
 
-const Comments = () => {
+const Comment = () => {
 
     const queryClient = useQueryClient();
 
@@ -16,15 +15,11 @@ const Comments = () => {
         data: comments,
     } = useQuery({
         queryKey: ['comments'],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/comment`)
-                .then((res) => res.data),
+        queryFn: getComments
     });
 
     const mutation = useMutation({
-        mutationFn: (id) =>
-            axios.delete(`${import.meta.env.VITE_SERVER_URL}/comment/${id}`),
+        mutationFn: (id) => deleteComment(id),
         onSuccess: () => {
             queryClient.invalidateQueries('comments');
         },
@@ -34,7 +29,7 @@ const Comments = () => {
     });
 
 
-    const deleteComment = (id) => {
+    const handledeleteComment = (id) => {
         toast.promise(
             mutation.mutateAsync(id),
             {
@@ -54,10 +49,8 @@ const Comments = () => {
     }
 
     return (
-        <AdminLayout>
-            <CommentsTable comments={comments} deleteComment={deleteComment} />
-        </AdminLayout>
+        <CommentsTable comments={comments} handledeleteComment={handledeleteComment} />
     )
 }
 
-export default Comments
+export default Comment

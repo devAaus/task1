@@ -1,4 +1,7 @@
 import React from 'react'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
+import { Textarea } from '../ui/textarea'
 
 const CommentForm = ({
     handleSubmit,
@@ -12,43 +15,40 @@ const CommentForm = ({
 }) => {
     return (
         <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
-            <textarea
-                className="textarea textarea-secondary w-full h-20"
+            <Textarea
+                className='min-h-[20px]'
                 placeholder="Comment"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-            ></textarea>
+            ></Textarea>
 
             <div className='w-full flex gap-2'>
-                <input
+                <Input
                     placeholder='Author Email'
                     type="text"
-                    className='input input-secondary w-full max-w-sm'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input
+                <Input
                     placeholder='Author Name'
                     type="text"
-                    className='input input-secondary w-full max-w-sm'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
             </div>
 
-            <input
+            <Input
                 placeholder='Blog Id'
                 type="text"
-                className='input input-secondary max-w-sm'
                 value={blogId}
                 readOnly
             />
 
 
 
-            <button type='submit' className="btn btn-primary max-w-32">
+            <Button type='submit' size="sm">
                 Submit
-            </button>
+            </Button>
         </form>
     )
 }

@@ -2,7 +2,8 @@ import React from 'react'
 import BlogCard from '../components/cards/BlogCard'
 import AuthorSection from '../components/AuthorSection'
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { getBlogs } from '@/services/axios.service';
+
 
 const Home = () => {
 
@@ -12,10 +13,7 @@ const Home = () => {
         data: blog,
     } = useQuery({
         queryKey: ['blog'],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/blog`)
-                .then((res) => res.data),
+        queryFn: getBlogs
     });
 
 

@@ -1,40 +1,42 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
 
-const tabs = [
-    {
-        id: 1,
-        name: 'Blogs',
-        path: '/dashboard'
-    },
-    {
-        id: 2,
-        name: 'Authors',
-        path: '/dashboard/authors'
-    },
-    {
-        id: 3,
-        name: 'Comments',
-        path: '/dashboard/comments'
-    }
-]
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Blogs from "./admin/Blogs"
+import Authors from "./admin/Authors"
+import Comment from "./admin/Comment"
+
 
 const Tab = () => {
 
-    const pathName = useLocation()
-
     return (
-        <div role="tablist" className="tabs tabs-lifted">
-            {tabs.map((t) => (
-                <Link
-                    key={t.id}
-                    to={t.path}
-                    className={`tab ${pathName.pathname === t.path ? 'tab-active' : ''}`}
-                >
-                    {t.name}
-                </Link>
-            ))}
-        </div>
+
+        <Tabs defaultValue="blogs" className="w-full ">
+            <TabsList className="w-full">
+                <TabsTrigger value="blogs" className="w-full">
+                    Blogs
+                </TabsTrigger>
+
+                <TabsTrigger value="authors" className="w-full">
+                    Authors
+                </TabsTrigger>
+
+                <TabsTrigger value="comments" className="w-full">
+                    Comments
+                </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="blogs">
+                <Blogs />
+            </TabsContent>
+
+            <TabsContent value="authors">
+                <Authors />
+            </TabsContent>
+
+            <TabsContent value="comments">
+                <Comment />
+            </TabsContent>
+        </Tabs>
+
     )
 }
 

@@ -1,9 +1,9 @@
+import { getAuthorById } from '@/services/axios.service';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
-const BlogCard = ({ blog, isHome }) => {
+const BlogCard = ({ blog, isHome, isProfile }) => {
 
     const authorId = blog?.author;
     const {
@@ -12,10 +12,7 @@ const BlogCard = ({ blog, isHome }) => {
         data: author,
     } = useQuery({
         queryKey: ['author', authorId],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/author/${authorId}`)
-                .then((res) => res.data),
+        queryFn: () => getAuthorById(authorId),
     });
 
     const formattedDate = blog && blog.createdAt
@@ -45,14 +42,10 @@ const BlogCard = ({ blog, isHome }) => {
                             <span className='ml-2 text-base text-gray-200'>{author.fullName}</span>
                         </p>}
 
-                        {/* <p className='text-xs text-gray-300 ml-1'>
+                        {isProfile && <p className='text-xs text-gray-300 ml-1'>
                             {formattedDate}
-                        </p> */}
+                        </p>}
                     </div>
-
-                    {/* <p className='text-base mt-1 ml-1 font-medium'>
-                        <div dangerouslySetInnerHTML={{ __html: blog.content.substring(0, 40) + '....' }} />
-                    </p> */}
 
                 </article>
             </Link>

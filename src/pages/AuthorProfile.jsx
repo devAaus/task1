@@ -1,35 +1,31 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import BlogCard from '../components/cards/BlogCard'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getAuthorById, getBlogs } from '@/services/axios.service'
 
 const Author = () => {
     const { id } = useParams()
 
-    const { isLoading, error, data: author } = useQuery({
+    const { isLoading: isAuthorLoading, error: authorError, data: author } = useQuery({
         queryKey: ['author', id],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/author/${id}`)
-                .then((res) => res.data)
+        queryFn: () => getAuthorById(id)
     })
 
     const { isLoading: isBlogsLoading, error: blogsError, data: blogs } = useQuery({
         queryKey: ['blogs'],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/blog`)
-                .then((res) => res.data),
+        queryFn: getBlogs
     })
 
     const blog = blogs?.filter(b => b?.author === id) || [];
 
 
-    if (isLoading || isBlogsLoading) {
+    if (isAuthorLoading || isBlogsLoading) {
         return <div>Loading...</div>
     }
 
-    if (error || blogsError) {
+    if (authorError || blogsError) {
         return <div>Error: {error?.message || blogsError?.message}</div>
     }
 
@@ -37,13 +33,12 @@ const Author = () => {
         <div className='flex flex-col gap-2'>
 
             <div className='flex items-center gap-4'>
-                <div className="avatar placeholder">
-                    <div className="bg-neutral text-white rounded-full w-20">
-                        <span className="text-3xl">
-                            {author.fullName[0]}
-                        </span>
-                    </div>
-                </div>
+
+                <Avatar className="w-20 h-20">
+                    <AvatarFallback className="text-4xl font-semibold">
+                        {author.fullName[0]}
+                    </AvatarFallback>
+                </Avatar>
 
                 <h2 className='text-3xl text-title font-bold'>
                     {author.fullName}
@@ -55,9 +50,14 @@ const Author = () => {
             </span>
 
 
-            <div role="tablist" className="tabs tabs-lifted mt-12">
-                <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Blogs" checked readOnly />
-                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
+            <Tabs defaultValue="blogs" className="w-full mt-12">
+                <TabsList className="w-full">
+                    <TabsTrigger value="blogs" className="w-full">
+                        Blogs
+                    </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="blogs">
                     {blog.length > 0 ? (
                         blog.map((b) => (
                             <BlogCard blog={b} key={b._id} isHome={false} />
@@ -65,8 +65,8 @@ const Author = () => {
                     ) : (
                         <div>No blogs found.</div>
                     )}
-                </div>
-            </div>
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }

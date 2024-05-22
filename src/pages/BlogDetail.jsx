@@ -1,28 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useParams } from 'react-router-dom'
 import CommentSection from '../components/CommentSection';
 import { format } from 'date-fns';
+import { getAuthorById, getBlogById } from '@/services/axios.service';
 
 const BlogDetail = () => {
     const { id } = useParams()
 
-
-    //fetching blog data
     const {
         isLoading,
         error,
         data: blog,
     } = useQuery({
         queryKey: ['blog', id],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/blog/${id}`)
-                .then((res) => res.data.blog),
+        queryFn: () => getBlogById(id),
     });
 
 
-    //fetching author data
     const authorId = blog?.author;
     const {
         isLoading: isLoadingAuthor,
@@ -30,34 +24,22 @@ const BlogDetail = () => {
         data: author,
     } = useQuery({
         queryKey: ['author', authorId],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/author/${authorId}`)
-                .then((res) => res.data),
+        queryFn: () => getAuthorById(authorId),
     });
 
 
 
-
-    //formatting date
     const formattedDate = blog && blog.createdAt
         ? format(new Date(blog.createdAt), 'MMMM d, yyyy')
         : '';
 
-    if (isLoading) {
+
+    if (isLoading || isLoadingAuthor) {
         return <div>Loading...</div>;
     }
 
-    if (error) {
+    if (error || errorAuthor) {
         return <div>Error: {error.message}</div>;
-    }
-
-    if (isLoadingAuthor) {
-        return <div>Loading...</div>;
-    }
-
-    if (errorAuthor) {
-        return <div>Error: {errorAuthor.message}</div>;
     }
 
 

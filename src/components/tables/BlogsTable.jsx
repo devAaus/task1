@@ -1,21 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import React from 'react'
 import { FaRegEdit } from 'react-icons/fa'
 import { MdDeleteOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { getAuthorById } from '@/services/axios.service'
 
-const TableRow = ({ blog, index, deleteBlog }) => {
+const TableDetail = ({ blog, index, handledeleteBlog }) => {
     const {
         isLoading: isLoadingAuthor,
         error: errorAuthor,
         data: author,
     } = useQuery({
         queryKey: ['author', blog.author],
-        queryFn: () =>
-            axios
-                .get(`${import.meta.env.VITE_SERVER_URL}/author/${blog.author}`)
-                .then((res) => res.data),
+        queryFn: () => getAuthorById(blog.author),
     });
 
     if (isLoadingAuthor) {
@@ -35,54 +40,56 @@ const TableRow = ({ blog, index, deleteBlog }) => {
     }
 
     return (
-        <tr className='hover' key={blog._id}>
-            <td>{index + 1}</td>
-            <td>
+        <TableRow className='hover' key={blog._id}>
+            <TableCell className="font-medium">
+                {index + 1}
+            </TableCell>
+
+            <TableCell>
                 <Link to={`/blog/${blog._id}`}>
-                    {blog.title}
+                    {blog.title.substring(0, 50) + '...'}
                 </Link>
-            </td>
+            </TableCell>
 
-            <td>{author.fullName}</td>
+            <TableCell>{author.fullName}</TableCell>
 
-            <td className='flex gap-2 items-center'>
+            <TableCell className='flex gap-2 items-center'>
                 <Link to={'/edit-blog'} className='text-blue-400'>
                     <FaRegEdit size={17} />
                 </Link>
 
-                <button onClick={() => deleteBlog(blog._id)}>
+                <button onClick={() => handledeleteBlog(blog._id)}>
                     <MdDeleteOutline size={20} color='red' />
                 </button>
-            </td>
-        </tr>
+            </TableCell>
+        </TableRow>
     );
 };
 
 
-const BlogsTable = ({ blogs, deleteBlog }) => {
+const BlogsTable = ({ blogs, handledeleteBlog }) => {
     return (
-        <div className="overflow-x-auto">
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>S.N.</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {blogs.map((blog, index) => (
-                        <TableRow
-                            key={blog._id}
-                            blog={blog}
-                            index={index}
-                            deleteBlog={deleteBlog}
-                        />
-                    ))}
-                </tbody>
-            </table>
-        </div>
+
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead className="w-[100px]">S.N.</TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Author</TableHead>
+                    <TableHead>Actions</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {blogs.map((blog, index) => (
+                    <TableDetail
+                        key={blog._id}
+                        blog={blog}
+                        index={index}
+                        handledeleteBlog={handledeleteBlog}
+                    />
+                ))}
+            </TableBody>
+        </Table>
     );
 }
 

@@ -1,6 +1,17 @@
 import React from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css'
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
 
 const BlogForm = ({
     handleSubmit,
@@ -8,8 +19,8 @@ const BlogForm = ({
     setTitle,
     content,
     setContent,
-    authorId,
-    setAuthorId
+    setAuthorId,
+    authors
 }) => {
 
     return (
@@ -20,38 +31,28 @@ const BlogForm = ({
             onSubmit={handleSubmit}
         >
 
-            <input
+            <Input
                 type="text"
                 placeholder="Title"
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="input input-bordered w-full max-w-xs"
             />
 
-            {/* <select className="select select-bordered w-full max-w-xs">
-                <option disabled selected>Select Author</option>
-                <option>Game of Thrones</option>
-                <option>Lost</option>
-                <option>Breaking Bad</option>
-                <option>Walking Dead</option>
-            </select> */}
-
-            <input
-                type='text'
-                value={authorId}
-                placeholder='Author Id'
-                onChange={(e) => setAuthorId(e.target.value)}
-                className='input input-bordered w-full max-w-xs'
-            />
-
-            {/* <textarea
-                className="textarea textarea-bordered"
-                placeholder="Description"
-                name="content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-            ></textarea> */}
+            <Select onValueChange={(value) => setAuthorId(value)}>
+                <SelectTrigger className="max-w-xs">
+                    <SelectValue placeholder="Select Author" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        {authors.map((author) => (
+                            <SelectItem key={author._id} value={author._id}>
+                                {author.fullName}
+                            </SelectItem>
+                        ))}
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
 
 
             <ReactQuill
@@ -59,16 +60,17 @@ const BlogForm = ({
                 value={content}
                 onChange={setContent}
                 placeholder='Description'
-                className='textarea textarea-bordered p-0 h-60'
+                className='min-h-[80px] w-full rounded-md border border-primary bg-bg text-sm'
             />
 
 
-            <button
+            <Button
                 type="submit"
-                className="btn btn-primary"
+                variant="default"
+                size="lg"
             >
                 Submit
-            </button>
+            </Button>
 
         </form>
     )
