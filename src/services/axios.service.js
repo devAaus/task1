@@ -40,6 +40,7 @@ export const decreaseLikesCount = async (id) => {
 
 
 
+
 export const getAuthors = async () => {
     const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/author`);
     return response.data
@@ -52,6 +53,12 @@ export const getAuthorById = async (authorId) => {
 
 export const addAuthor = async (newAuthor) => {
     const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/author`, newAuthor);
+    return response.data;
+};
+
+export const updateAuthor = async (updatedAuthor) => {
+    const { id } = updatedAuthor;
+    const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/author/${id}`, updatedAuthor);
     return response.data;
 };
 

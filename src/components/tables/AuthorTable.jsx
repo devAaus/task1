@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table"
 
 
-const AuthorTable = ({ authors, handleDeleteAuthor }) => {
+const AuthorTable = ({ authors, handleDeleteAuthor, setIsDialogOpen }) => {
     return (
 
         <Table>
@@ -40,9 +40,12 @@ const AuthorTable = ({ authors, handleDeleteAuthor }) => {
                         <TableCell>{a.email}</TableCell>
 
                         <TableCell className="flex gap-2 items-center">
-                            <Link to={'/edit-blog'} className='text-blue-400'>
+                            <button
+                                className='text-blue-400'
+                                onClick={() => setIsDialogOpen(true)}
+                            >
                                 <FaRegEdit size={17} />
-                            </Link>
+                            </button>
 
                             <button onClick={() => handleDeleteAuthor(a._id)}>
                                 <MdDeleteOutline size={20} color='red' />

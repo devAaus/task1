@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BlogForm from '@/components/forms/BlogForm';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { getAuthors, getBlogById, updateBlog } from '@/services/axios.service';
+import { getBlogById, updateBlog } from '@/services/axios.service';
 import { useParams } from 'react-router-dom';
 
 const UpdateBlog = () => {

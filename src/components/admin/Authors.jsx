@@ -32,7 +32,23 @@ const Authors = () => {
             queryClient.invalidateQueries(['authors']);
             setFullName('');
             setEmail('');
+            toast.success('Author Added!');
             setIsDialogOpen(false);
+        },
+        onError: (error) => {
+            console.error(error);
+            toast.error('Error while adding author.');
+        },
+    });
+
+    const updateAuthorMutation = useMutation({
+        mutationFn: (data) => addAuthor(data),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['authors']);
+            setIsDialogOpen(false);
+        },
+        onError: (error) => {
+            console.error(error);
         },
     });
 
@@ -40,37 +56,24 @@ const Authors = () => {
         mutationFn: (id) => deleteAuthor(id),
         onSuccess: () => {
             queryClient.invalidateQueries(['authors']);
+            toast.success('Author Deleted!');
         },
         onError: (error) => {
             console.error(error);
+            toast.error('Error while deleting author.');
         },
     });
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const newAuthor = { fullName, email };
-        toast.promise(
-            addAuthormutation.mutateAsync(newAuthor),
-            {
-                loading: 'Adding Author...',
-                success: () => {
-                    setIsDialogOpen(false);
-                    return 'Author Added!';
-                },
-                error: 'Error While Adding.',
-            }
-        );
+        addAuthormutation.mutateAsync(newAuthor)
+
     };
 
     const handleDeleteAuthor = (id) => {
-        toast.promise(
-            deleteAuthormutation.mutateAsync(id),
-            {
-                loading: 'Deleting Author...',
-                success: 'Author Deleted!',
-                error: 'Error While Deleting.',
-            }
-        );
+        deleteAuthormutation.mutateAsync(id)
+
     };
 
     if (isLoading) {
@@ -108,6 +111,7 @@ const Authors = () => {
             <AuthorTable
                 authors={authors}
                 handleDeleteAuthor={handleDeleteAuthor}
+                setIsDialogOpen={setIsDialogOpen}
             />
         </div>
     );
