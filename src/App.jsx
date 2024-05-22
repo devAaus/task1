@@ -7,6 +7,7 @@ import AddBlog from "./pages/AddBlog"
 import BlogDetail from "./pages/BlogDetail"
 import AuthorProfile from "./pages/AuthorProfile"
 import UpdateBlog from "./pages/admin/UpdateBlog"
+import Login from "./pages/Login"
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
                   <Route path="/add-blog" element={<AddBlog />} />
                   <Route path="/update-blog/:id" element={<UpdateBlog />} />
                   <Route path="/author/:id" element={<AuthorProfile />} />
-
+                  <Route path="/login" element={<Login />} />
 
                   <Route path="/dashboard" element={<Dashboard />} />
 

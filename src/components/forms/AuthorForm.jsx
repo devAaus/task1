@@ -28,6 +28,7 @@ const AuthorForm = ({ handleSubmit, fullName, email, setEmail, setFullName }) =>
                 type="submit"
                 variant="default"
                 size="lg"
+                className="w-full max-w-xs"
             >
                 Submit
             </Button>

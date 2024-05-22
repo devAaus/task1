@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+
 import { Link } from 'react-router-dom'
 import {
     DropdownMenu,
@@ -7,13 +7,11 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from './ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, } from "@/components/ui/avatar"
 
 
 
 const Navbar = () => {
-
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
 
     return (
         <nav className='py-8'>
@@ -26,59 +24,59 @@ const Navbar = () => {
                     </h2>
                 </Link>
 
-                {isLoggedIn
-                    ? (
-                        <div className='flex items-center justify-center gap-6 '>
-                            <Link to={'/add-blog'}>
-                                <Button variant="default" size="sm" className="self-end">
-                                    Add Blog
-                                </Button>
-                            </Link>
+
+                <div className='flex items-center justify-center gap-6 '>
+                    <Link to={'/add-blog'}>
+                        <Button variant="default" size="sm" className="self-end">
+                            Add Blog
+                        </Button>
+                    </Link>
+
+                    <Link to={'/login'}>
+                        <Button variant="default" size="sm">
+                            Add Author
+                        </Button>
+                    </Link>
 
 
-                            <DropdownMenu>
-                                <DropdownMenuTrigger>
-                                    <Avatar>
-                                        <AvatarFallback>CN</AvatarFallback>
-                                    </Avatar>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <Avatar>
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
 
-                                </DropdownMenuTrigger>
+                        </DropdownMenuTrigger>
 
-                                <DropdownMenuContent size="sm">
-                                    <DropdownMenuItem>
-                                        <Link to={'/profile'}>
-                                            Profile
-                                        </Link>
-                                    </DropdownMenuItem>
+                        <DropdownMenuContent size="sm">
+                            <DropdownMenuItem>
+                                <Link to={'/profile'}>
+                                    Profile
+                                </Link>
+                            </DropdownMenuItem>
 
-                                    <DropdownMenuItem>
-                                        <Link to={'/dashboard'}>
-                                            Dashboard
-                                        </Link>
-                                    </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Link to={'/dashboard'}>
+                                    Dashboard
+                                </Link>
+                            </DropdownMenuItem>
 
-                                    <Button
-                                        variant="destructive"
-                                        size="sm"
-                                        className="ml-1 mt-1"
-                                        onClick={() => setIsLoggedIn(false)}
-                                    >
-                                        Logout
-                                    </Button>
-
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-
-                        </div>
-
-                    ) : (
-                        <Link to={'/login'}>
-                            <Button className='btn btn-sm btn-primary text-lg'>
-                                Login
+                            <Button
+                                variant="destructive"
+                                size="sm"
+                                className="ml-1 mt-1"
+                                onClick={() => setIsLoggedIn(false)}
+                            >
+                                Logout
                             </Button>
-                        </Link>
-                    )
-                }
+
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                </div>
+
+
+
+
             </div>
         </nav>
     )
