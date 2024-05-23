@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import CommentSection from '../components/CommentSection';
@@ -24,7 +24,13 @@ const BlogDetail = () => {
         queryFn: () => getAuthorById(authorId),
     });
 
-    const [likesCount, setLikesCount] = useState(blog?.likes_count);
+    const [likesCount, setLikesCount] = useState(0);
+
+    useEffect(() => {
+        if (blog) {
+            setLikesCount(blog.likes_count);
+        }
+    }, [blog]);
 
     const likeMutation = useMutation({
         mutationFn: () => increaseLikesCount(id),
@@ -84,7 +90,7 @@ const BlogDetail = () => {
                         <BiSolidUpvote className="h-5 w-5" />
                     </Button>
 
-                    <span className="ml-1 text-base">{blog.likes_count}</span>
+                    <span className="ml-1 text-base">{likesCount}</span>
                 </div>
 
                 <Separator orientation="vertical" className="h-5" />

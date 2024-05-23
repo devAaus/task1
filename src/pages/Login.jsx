@@ -17,7 +17,6 @@ const Login = () => {
             setFullName('');
             setEmail('');
             toast.success('Author Added!');
-            setIsDialogOpen(false);
         },
         onError: (error) => {
             console.error(error);

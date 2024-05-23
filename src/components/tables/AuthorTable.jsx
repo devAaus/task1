@@ -40,12 +40,9 @@ const AuthorTable = ({ authors, handleDeleteAuthor, setIsDialogOpen }) => {
                         <TableCell>{a.email}</TableCell>
 
                         <TableCell className="flex gap-2 items-center">
-                            <button
-                                className='text-blue-400'
-                                onClick={() => setIsDialogOpen(true)}
-                            >
+                            <Link to={`/update-author/${a._id}`} className='text-blue-400'>
                                 <FaRegEdit size={17} />
-                            </button>
+                            </Link>
 
                             <button onClick={() => handleDeleteAuthor(a._id)}>
                                 <MdDeleteOutline size={20} color='red' />
