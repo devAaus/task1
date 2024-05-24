@@ -48,26 +48,27 @@ const Navbar = () => {
                         </DropdownMenuTrigger>
 
                         <DropdownMenuContent size="sm">
-                            <DropdownMenuItem>
+                            <DropdownMenuItem asChild>
                                 <Link to={'/profile'}>
                                     Profile
                                 </Link>
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem>
+                            <DropdownMenuItem asChild>
                                 <Link to={'/dashboard'}>
                                     Dashboard
                                 </Link>
                             </DropdownMenuItem>
 
-                            <Button
-                                variant="destructive"
-                                size="sm"
-                                className="ml-1 mt-1"
-                                onClick={() => setIsLoggedIn(false)}
-                            >
-                                Logout
-                            </Button>
+                            <DropdownMenuItem className="focus:bg-transparent">
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    onClick={() => setIsLoggedIn(false)}
+                                >
+                                    Logout
+                                </Button>
+                            </DropdownMenuItem>
 
                         </DropdownMenuContent>
                     </DropdownMenu>
