@@ -4,6 +4,7 @@ import BlogCard from '../components/cards/BlogCard'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getAuthorById, getBlogs } from '@/services/axios.service'
+import Loader from '@/components/Loader'
 
 const Author = () => {
     const { id } = useParams()
@@ -22,7 +23,9 @@ const Author = () => {
 
 
     if (isAuthorLoading || isBlogsLoading) {
-        return <div>Loading...</div>
+        return <div className='flex items-center justify-center h-[70vh]'>
+            <Loader />
+        </div>;
     }
 
     if (authorError || blogsError) {

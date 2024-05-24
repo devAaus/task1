@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { Separator } from '@/components/ui/separator';
+import Loader from '@/components/Loader';
 
 const BlogDetail = () => {
     const { id } = useParams();
@@ -59,7 +60,9 @@ const BlogDetail = () => {
     const formattedDate = blog && blog.createdAt ? format(new Date(blog.createdAt), 'MMMM d, yyyy') : '';
 
     if (isLoading || isLoadingAuthor) {
-        return <div>Loading...</div>;
+        return <div className='flex items-center justify-center h-[70vh]'>
+            <Loader />
+        </div>;;
     }
 
     if (error || errorAuthor) {

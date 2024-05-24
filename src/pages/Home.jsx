@@ -3,6 +3,7 @@ import BlogCard from '../components/cards/BlogCard'
 import AuthorSection from '../components/AuthorSection'
 import { useQuery } from '@tanstack/react-query';
 import { getBlogs } from '@/services/axios.service';
+import Loader from '@/components/Loader';
 
 
 const Home = () => {
@@ -18,7 +19,9 @@ const Home = () => {
 
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div className='flex items-center justify-center h-[70vh]'>
+            <Loader />
+        </div>;
     }
 
     if (error) {
